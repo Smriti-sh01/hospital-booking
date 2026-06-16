@@ -13,11 +13,11 @@ REQUIRED_SLOTS: list[str] = ["city", "branch", "department", "doctor", "time_slo
 
 class AppointmentState(TypedDict, total=False):
     # ── channel ──────────────────────────────────────────────────────────
-    channel_id: str                    # "webchat:<id>" | "whatsapp:<phone>"
-    messages:   list[dict[str, str]]   # full conversation [{role, content}]
+    channel_id: str                    
+    messages:   list[dict[str, str]]   
 
     # ── intent ───────────────────────────────────────────────────────────
-    intent:           Optional[str]    # "book_appointment" | "greeting" | etc.
+    intent:           Optional[str]    
     intent_change:    bool
     proposed_intent:  Optional[str]
     active_flow:      Optional[str]
@@ -28,14 +28,14 @@ class AppointmentState(TypedDict, total=False):
     last_extracted_slots: dict[str, str]
 
     # ── confirmation guard ────────────────────────────────────────────────
-    awaiting_confirm: Optional[str]    # None | "booking" | "intent_switch"
+    awaiting_confirm: Optional[str]    
     confirm_retries:  int
 
     # ── API cache ─────────────────────────────────────────────────────────
-    api_context: dict[str, Any]        # hospitals/departments/doctors/slots/resolved
+    api_context: dict[str, Any]       
 
     # ── outbound payload ──────────────────────────────────────────────────
-    response: Optional[dict]           # set by response_node; sent to channel
+    response: Optional[dict]         
 
     # ── control ───────────────────────────────────────────────────────────
     step:        Optional[str]

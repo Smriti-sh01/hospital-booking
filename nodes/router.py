@@ -43,4 +43,4 @@ def router(state: AppointmentState) -> str:
         return "slot_fill_node"
 
     # ✅ 7. FALLBACK (GENERAL CHAT)
-    return "fallback_node"
+    return "greeting_node"

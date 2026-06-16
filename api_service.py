@@ -1,7 +1,6 @@
 import requests
 from flow_config import FLOW_CONFIG, BASE_URL
 
-
 def call_api(slot_name: str, session: dict):
     config = FLOW_CONFIG[slot_name].get("api")
 
@@ -30,3 +29,4 @@ def call_api(slot_name: str, session: dict):
         return response.json()
     except Exception as e:
         return {"error": str(e)}
+

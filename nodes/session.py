@@ -58,3 +58,4 @@ def session_write_node(state: AppointmentState) -> dict:
     channel_id = state.get("channel_id", "unknown")
     session_store.save_session(channel_id, state)
     return {"step": "session_write"}
+    
