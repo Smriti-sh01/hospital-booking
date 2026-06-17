@@ -19,7 +19,6 @@ from __future__ import annotations
 from state import AppointmentState
 import session_store
 
-
 def session_load_node(state: AppointmentState) -> dict:
     """
     Merge persisted session state into the current (partial) state.
@@ -58,4 +57,3 @@ def session_write_node(state: AppointmentState) -> dict:
     channel_id = state.get("channel_id", "unknown")
     session_store.save_session(channel_id, state)
     return {"step": "session_write"}
-    

@@ -1,86 +1,3 @@
-# from __future__ import annotations
-
-# from langgraph.graph import StateGraph, START, END
-
-# from state import AppointmentState
-# from nodes.normalise     import normalise_input_node
-# from nodes.session       import session_load_node, session_write_node
-# from nodes.classify      import llm_classify_node
-# from nodes.router        import router
-# from nodes.greeting      import greeting_node
-# from nodes.slot_fill     import slot_fill_node
-# from nodes.api_chain     import api_chain_node
-# from nodes.confirmation  import confirmation_node, confirmation_handler
-# from nodes.response      import response_node
-
-# # ✅ ADD THESE
-# from nodes.info          import info_node
-# from nodes.fallback      import fallback_node
-
-
-# def build_graph() -> StateGraph:
-#     g = StateGraph(AppointmentState)
-
-#     # ── Register nodes ────────────────────────────────────────────────────
-#     g.add_node("normalise_input",      normalise_input_node)
-#     g.add_node("session_load",         session_load_node)
-#     g.add_node("llm_classify",         llm_classify_node)
-
-#     g.add_node("greeting_node",        greeting_node)
-#     g.add_node("info_node",            info_node)           #  NEW
-#     g.add_node("fallback_node",        fallback_node)       #  NEW
-
-#     g.add_node("slot_fill_node",       slot_fill_node)
-#     g.add_node("api_chain_node",       api_chain_node)
-#     g.add_node("confirmation_node",    confirmation_node)
-#     g.add_node("confirmation_handler", confirmation_handler)
-
-#     g.add_node("session_write",        session_write_node)
-#     g.add_node("response_node",        response_node)
-
-#     # ── Fixed edges ───────────────────────────────────────────────────────
-#     g.add_edge(START,              "normalise_input")
-#     g.add_edge("normalise_input",  "session_load")
-#     g.add_edge("session_load",     "llm_classify")
-
-#     # ── Conditional routing ───────────────────────────────────────────────
-#     g.add_conditional_edges(
-#         "llm_classify",
-#         router,
-#         {
-#             "greeting_node":        "greeting_node",
-#             "info_node":            "info_node",        # ✅ NEW
-#             "fallback_node":        "fallback_node",    # ✅ NEW
-#             "slot_fill_node":       "slot_fill_node",
-#             "api_chain_node":       "api_chain_node",
-#             "confirmation_node":    "confirmation_node",
-#             "confirmation_handler": "confirmation_handler",
-#         },
-#     )
-
-#     # ── API chain always flows into slot filling ──────────────────────────
-#     g.add_edge("api_chain_node", "slot_fill_node")
-
-#     # ── All logic nodes → session_write ───────────────────────────────────
-#     for node in [
-#         "greeting_node",
-#         "info_node",            # ✅ NEW
-#         "fallback_node",        # ✅ NEW
-#         "slot_fill_node",
-#         "confirmation_node",
-#         "confirmation_handler",
-#     ]:
-#         g.add_edge(node, "session_write")
-
-#     # ── session_write → response → END ───────────────────────────────────
-#     g.add_edge("session_write", "response_node")
-#     g.add_edge("response_node", END)
-
-#     return g
-
-
-# compiled_graph = build_graph().compile()
-
 """
 graph.py
 ────────
@@ -165,6 +82,7 @@ def build_graph() -> StateGraph:
             "api_chain_node":       "api_chain_node",
             "confirmation_node":    "confirmation_node",
             "confirmation_handler": "confirmation_handler",
+            "session_write":        "session_write",
         },
     )
 
@@ -191,3 +109,4 @@ def build_graph() -> StateGraph:
 
 # Compile once at import time — reused for every request
 compiled_graph = build_graph().compile()
+
