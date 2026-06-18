@@ -8,7 +8,7 @@ from __future__ import annotations
 from typing import Any, Optional
 from typing_extensions import TypedDict
 
-REQUIRED_SLOTS: list[str] = ["city", "branch", "department", "doctor", "time_slot"]
+REQUIRED_SLOTS: list[str] = ["city", "branch", "department", "doctor", "date", "time_slot"]
 
 
 class AppointmentState(TypedDict, total=False):
@@ -21,6 +21,7 @@ class AppointmentState(TypedDict, total=False):
     intent_change:    bool
     proposed_intent:  Optional[str]
     active_flow:      Optional[str]
+    is_option_selection: bool
 
     # ── slots ─────────────────────────────────────────────────────────────
     filled_slots:         dict[str, str]
@@ -32,7 +33,9 @@ class AppointmentState(TypedDict, total=False):
     confirm_retries:  int
 
     # ── API cache ─────────────────────────────────────────────────────────
-    api_context: dict[str, Any]       
+    api_context: dict[str, Any]
+    # Database IDs resolved from user selections (hospital_id, department_id, doctor_id)
+    resolved_ids: dict[str, Any]
 
     # ── outbound payload ──────────────────────────────────────────────────
     response: Optional[dict]         

@@ -34,6 +34,14 @@ FLOW_CONFIG: dict[str, dict] = {
         }
     },
 
+    "date": {
+        "question": "Which date would you like to book?",
+        "api": {
+            "endpoint": "/doctors/{doctor_id}/slots",
+            "method": "GET"
+        }
+    },
+
     "time_slot": {
         "question": "Which time slot works for you?",
         "api": {

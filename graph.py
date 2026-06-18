@@ -78,6 +78,7 @@ def build_graph() -> StateGraph:
         router,
         {
             "greeting_node":        "greeting_node",
+            "info_node":            "greeting_node",   # info_node falls back to greeting
             "slot_fill_node":       "slot_fill_node",
             "api_chain_node":       "api_chain_node",
             "confirmation_node":    "confirmation_node",

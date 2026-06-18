@@ -22,6 +22,7 @@ def _fresh_state(channel_id: str) -> AppointmentState:
         pending_slots=list(REQUIRED_SLOTS),
         last_extracted_slots={},
         api_context={},
+        resolved_ids={},
         confirmed=False,
         intent_change=False,
         confirm_retries=0,
